@@ -4,7 +4,7 @@ from sklearn.metrics import classification_report, accuracy_score
 import pandas as pd
 
 # Carregar os dados
-data = pd.read_csv('/mnt/Bus_13_mexh.csv', delimiter=';', engine='python')
+data = pd.read_csv('/data/Bus_13_mexh.csv', delimiter=';', engine='python')
 
 # Separar os dados em recursos (X) e alvo (y)
 X = data.iloc[:, :-1]  # Todas as colunas, exceto a última
