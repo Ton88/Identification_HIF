@@ -3,36 +3,36 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, accuracy_score
 import pandas as pd
 
-# Carregar os dados
-data = pd.read_csv('/data/Bus_13_mexh.csv', delimiter=';', engine='python')
+# Load the data
+data = pd.read_csv('/mnt/Bus_13_mexh.csv', delimiter=';', engine='python')
 
-# Separar os dados em recursos (X) e alvo (y)
-X = data.iloc[:, :-1]  # Todas as colunas, exceto a última
-y = data.iloc[:, -1]   # Apenas a última coluna
+# Split the data into features (X) and target (y)
+X = data.iloc[:, :-1]  # All columns except the last one
+y = data.iloc[:, -1]   # Only the last column
 
-# Converter os dados para valores numéricos
-X = X.apply(pd.to_numeric, errors='coerce').fillna(0)  # Valores não numéricos são convertidos para 0
+# Convert data to numeric values
+X = X.apply(pd.to_numeric, errors='coerce').fillna(0)  # Non-numeric values are converted to 0
 y = pd.to_numeric(y, errors='coerce').fillna(0)
 
-# Dividir os dados em conjuntos de treino e teste
+# Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=80, stratify=y
 )
 
-# Parâmetros do modelo KNN
-n_neighbors = 8  # Número de vizinhos
-weights = 'distance'  # Pesos (uniform ou distance)
-p = 2  # Distância de Minkowski (p=2 é equivalente à distância euclidiana)
+# KNN model parameters
+n_neighbors = 8  # Number of neighbors
+weights = 'distance'  # Weights (uniform or distance)
+p = 2  # Minkowski distance (p=2 is equivalent to Euclidean distance)
 
-# Criar e treinar o modelo KNN
+# Create and train the KNN model
 knn = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, p=p)
 knn.fit(X_train, y_train)
 
-# Fazer previsões e avaliar o modelo
+# Make predictions and evaluate the model
 y_pred = knn.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 report = classification_report(y_test, y_pred, target_names=["0", "1"])
 
-print(f"Acurácia: {accuracy:.2f}")
-print("Relatório de Classificação:")
+print(f"Accuracy: {accuracy:.2f}")
+print("Classification Report:")
 print(report)
