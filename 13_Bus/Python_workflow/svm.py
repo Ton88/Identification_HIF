@@ -1,49 +1,46 @@
 from sklearn.model_selection import train_test_split
-from sklearn.svm import SVR
+from sklearn.svm import NuSVR  # For ν-SVR
 from sklearn.metrics import mean_squared_error, accuracy_score, classification_report
 import pandas as pd
+import time
+import matplotlib.pyplot as plt  # To plot the confusion matrix
 
-# Carregar os dados
-data = pd.read_csv('/data/Bus_13_mexh.csv', delimiter=';', engine='python')
+# Load the data
+data = pd.read_csv('/mnt/Bus_13_mexh.csv', delimiter=';', engine='python')
 
-# Separar os dados em recursos (X) e alvo (y)
-X = data.iloc[:, :-1]  # Todas as colunas, exceto a última
-y = data.iloc[:, -1]   # Apenas a última coluna
+# Split the data into features (X) and target (y)
+X = data.iloc[:, :-1]  # All columns except the last one
+y = data.iloc[:, -1]   # Only the last column
 
-# Converter os dados para valores numéricos
-X = X.apply(pd.to_numeric, errors='coerce').fillna(0)  # Valores não numéricos são convertidos para 0
+# Convert data to numeric values
+X = X.apply(pd.to_numeric, errors='coerce').fillna(0)  # Non-numeric values are converted to 0
 y = pd.to_numeric(y, errors='coerce').fillna(0)
 
-# Dividir os dados em conjuntos de treino e teste
+# Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=80
 )
 
-# Parâmetros da SVM
-svm_type = 'epsilon'  # Tipo de SVM: 'epsilon' para regressão epsilon-SVR
-C = 1.0               # Custo da regressão (Complexity Bound)
-kernel = 'rbf'        # Kernel utilizado ('linear', 'poly', 'rbf', 'sigmoid')
-epsilon = 0.1         # Tolerância numérica
-max_iter = -1         # Limite de iterações (-1 para ilimitado)
+# ==============================
+# Parameters for ν-SVR
+# ==============================
+C = 1.0               # Complexity Bound
+nu = 0.2              # ν parameter (controls the number of support vectors and error tolerance)
+kernel = 'rbf'        # Kernel used ('linear', 'poly', 'rbf', 'sigmoid')
+max_iter = 100        # Iteration limit (-1 for unlimited)
+tol = 1e-3            # Numerical tolerance for optimization
 
-# Criar e treinar o modelo SVM
-svm = SVR(kernel=kernel, C=C, epsilon=epsilon, max_iter=max_iter)
+# Create and train the ν-SVR model
+svm = NuSVR(kernel=kernel, C=C, nu=nu, max_iter=max_iter, tol=tol)
 svm.fit(X_train, y_train)
 
-# Fazer previsões e avaliar o modelo
+# Make predictions and evaluate the model
 y_pred = svm.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
 accuracy = accuracy_score(y_test, y_pred.round())
 report = classification_report(y_test, y_pred.round())
 
-print(f"Erro Quadrático Médio: {mse:.2f}")
-print(f"Acurácia: {accuracy:.2f}")
-print("Relatório de Classificação:")
+print(f"Mean Squared Error: {mse:.2f}")
+print(f"Accuracy: {accuracy:.2f}")
+print("Classification Report:")
 print(report)
-
-# Comentários sobre os parâmetros:
-# - svm_type: Determina o tipo de SVM, aqui usamos SVR para regressão.
-# - C: Controla o trade-off entre alcançar uma margem maior e reduzir o erro de classificação.
-# - kernel: Define a função kernel a ser usada para transformar os dados.
-# - epsilon: Especifica uma margem de tolerância no problema de regressão.
-# - max_iter: Define o número máximo de iterações para a otimização.
