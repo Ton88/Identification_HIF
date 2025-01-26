@@ -45,3 +45,4 @@ report = classification_report(y_test, y_pred, target_names=["0", "1"])
 print(f"Accuracy: {accuracy:.2f}")
 print("Classification Report:")
 print(report)
+
