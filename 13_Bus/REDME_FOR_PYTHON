@@ -1,0 +1,78 @@
+Replication of Power System Simulation via Google Colab
+
+Overview
+
+This repository contains the necessary files and instructions to replicate power system simulations using Google Colab. The simulations are based on data and models presented in a dissertation and include network configurations for 13-bus and 34-bus systems. The repository provides Python scripts, processed data, and workflows for running the experiments.
+
+Repository Structure
+
+Processed_Data: Contains precomputed simulation results for the 34-bus system.
+
+Python_Workflow: Includes Python scripts required to execute the simulations in Google Colab.
+
+Network_Models: Provides the configuration files for the 13-bus and 34-bus systems.
+
+How to Use
+
+1. Download and Extract Files
+
+Navigate to the repository root.
+
+Click the green Code button and select Download ZIP.
+
+Extract the ZIP file on your computer, maintaining the folder structure.
+
+2. Open Google Colab
+
+Go to Google Colab.
+
+Click New Notebook to create a new workspace.
+
+3. Load the Simulation Code
+
+Open the extracted folder and locate the required Python script in the Python_Workflow directory.
+
+Open the script in a text editor and copy its contents.
+
+Paste the copied code into a new cell in the Colab notebook.
+
+4. Upload Necessary Data
+
+Connect Google Drive to Colab by running the following command in a Colab cell:
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+Click on the Files icon in Colab and navigate to your uploaded directory.
+
+Upload the required dataset files from the Processed_Data folder.
+
+5. Run the Simulation
+
+Modify the file paths in the script to match your uploaded directory.
+
+Execute the script by clicking Run.
+
+6. Analyze the Results
+
+Once the simulation runs successfully, results will be displayed in the output cells.
+
+The processed data can be further analyzed using signal processing techniques such as Wavelet Transformations.
+
+Requirements
+
+Google Colab account
+
+Python 3.x environment (pre-installed in Colab)
+
+Access to Google Drive for file storage
+
+Notes
+
+Ensure all dependencies required by the scripts are installed in the Colab environment.
+
+The folder structure should be maintained to avoid file path errors.
+
+Adjust the script parameters as necessary for different network configurations.
+
+This setup allows easy replication and execution of power system simulations using a cloud-based environment, making it accessible without the need for local computational resources.
