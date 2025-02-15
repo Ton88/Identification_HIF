@@ -18,6 +18,14 @@ The simulations are structured as follows:
 4. **Machine Learning Analysis**:
    - The processed data is analyzed using machine learning algorithms, including KNN, MLP, Decision Trees, Random Forest, and SVM, to evaluate the effectiveness of computational methods for fault detection.
 
+**Additional Instructions**
+
+Detailed instructions on how to perform the simulations can be found within the respective folders of this repository. Make sure to check the Python_Workflow or Orange_Workflow and Processed_Data directories for more information on setting up and running the simulations.
+
+This repository simplifies power system simulation execution using cloud resources, eliminating the need for local computational power.
+
+
+
 ### Source of Models
 
 The original bus system models included in `SIMU_2024.rar` were obtained from the official [MATLAB website](https://www.mathworks.com/products/matlab.html). These models are widely recognized for academic and research purposes.
