@@ -22,11 +22,11 @@ This repository contains the necessary files and instructions to replicate the H
 1. **Simulate the System**
    - Extract the Simulink model from the `Simulink_Models` folder (if available) and open it in MATLAB Simulink (version 2019b or compatible).
    - Run the simulation to generate fault data.
-   - Use `B13buss17.m` to save the simulation results into `Bus_13_20_s.csv`.
+   - Use `B13buss17.m` to save the simulation results into `19_06_20s_13Bus_200_linhas_10mile_seg.csv`.
 
 2. **Wavelet Transformations**
    - Open `mexh.ipynb` and `morl.ipynb` in Jupyter Notebook.
-   - Process the fault data and generate `Bus_13_mexh.csv` and `Bus_13_morl.csv`.
+   - Process the fault data and generate `mexh_pu_13bus_19_06_corf_7_200linhas_100mile.csv` and `morl_pu_13bus_19_06_corf_7_200linhas_100mile.csv`.
 
 3. **Machine Learning Analysis**
    - Use Orange Data Mining software to open the workflows in the `Orange_Workflows` folder.
