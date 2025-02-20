@@ -6,7 +6,7 @@ import time
 import matplotlib.pyplot as plt  # To plot the confusion matrix
 
 # Load the data
-data = pd.read_csv('/mnt/Bus_13_mexh.csv', delimiter=';', engine='python')
+data = pd.read_csv('/mnt/PUT THE NAME OF THE DATABASES HERE.CSV', delimiter=';', engine='python')
 
 # Split the data into features (X) and target (y)
 X = data.iloc[:, :-1]  # All columns except the last one
